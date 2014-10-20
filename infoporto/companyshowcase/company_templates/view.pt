@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="infoporto.companyshowcase">
+<body>
+
+<tal:comment tal:condition="nothing">
+    This is a sample view template. It will not be used for rendering the
+    content unless activated by creation of a view class with a matching name.
+</tal:comment>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+<h2 class="azienda-subtitle">Company Profile</h2>
+<p style="font-size: 130%" tal:replace="structure context/slogan" />
+<div class="azienda-profilo_aziendale" >
+<div tal:replace="structure context/profile/output" />
+</div>
+
+<div>Scarica l'<a tal:attributes="href string:${context/absolute_url}/@@download/abstract/${context/abstract/filename}">Abstract</a></div>
+
+<div class="azienda-recapiti azienda-infoblock">
+<h2 class="azienda-subtitle">Recapiti</h2>
+<div><label>Indirizzo:</label> <div class="azienda-indirizzo" tal:replace="structure context/address" /></div>
+<div><label>Telefono:</label> <div class="azienda-telefono" tal:replace="structure context/phone" /></div>
+<div><label>FAX:</label> <div class="azienda-indirizzo" tal:replace="structure context/fax" /></div>
+<div><label>E-mail:</label> <div class="azienda-indirizzo" tal:replace="structure context/email" /></div>
+<div><label>Twitter:</label> <div class="azienda-indirizzo" tal:replace="structure context/twitter" /></div>
+<div><label>Partita IVA:</label> <div class="azienda-indirizzo" tal:replace="structure context/vat" /></div>
+</div>
+
+<h2 class="azienda-subtitle">Attivit&agrave;</h2>
+<div class="azienda-extra azienda-infoblock">
+<div><label>Attivit&agrave;:</label> <div class="azienda-sezione" tal:replace="structure context/activities" /></div>
+<div><label>Sezione:</label> <div class="azienda-sezione" tal:replace="structure context/section" /></div>
+<div><label>Merceologia:</label> <div class="azienda-merceologia" tal:replace="structure context/merceology" /></div>
+<div><div class="azienda-attivita" tal:replace="structure context/activities" /></div>
+</div>
+
+<h2 class="azienda-subtitle">Proposte</h2>
+<div class="azienda-proposte" tal:replace="structure context/proposition/output">
+Non ci sono proposte attive.
+</div>
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

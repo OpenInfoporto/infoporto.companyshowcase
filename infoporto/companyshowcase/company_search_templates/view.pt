@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="infoporto.companyshowcase">
+<body>
+
+<tal:comment tal:condition="nothing">
+    This is a sample view template. It will not be used for rendering the
+    content unless activated by creation of a view class with a matching name.
+</tal:comment>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+    <form name="search-companies" method="post" action="#">
+        <table>
+            <tr>
+                <td width="50%">
+                    <div class="showcase-search-field">
+                        <label>Azienda</label>
+                        <input type="text" name="nome" />
+                    </div>
+                    <div class="showcase-search-field">
+                        <label>Sezione</label>
+                        <input type="text" name="sezione" />
+                    </div>
+                    <div class="showcase-search-field">
+                        <label>Merceologia</label>
+                        <input type="text" name="merceologia" />
+                    </div>
+                </td>
+                <td>
+                    <div class="showcase-search-field">
+                        <label>Citt&agrave;</label>
+                        <input type="text" name="city" />
+                    </div>
+                    <div class="showcase-search-field">
+                        <label>Attivit&agrave;</label>
+                        <input type="text" name="activity" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+
+        <div class="showcase-search-actions">
+            <input type="button" value="cerca" id="submit-search" />
+        </div>
+    </form>
+
+    <div id="showcase-results"></div>
+
+<script>
+
+$(function() {
+
+    $('#submit-search').on('click', function(){
+    
+        $('#showcase-results').html('La ricerca non ha prodotto risultati.');
+    
+    })
+
+});
+
+
+</script>
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+
