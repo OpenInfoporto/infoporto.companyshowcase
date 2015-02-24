@@ -36,11 +36,5 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
-  <browser:page
-    name="showcase_list"
-    for="Products.ATContentTypes.interface.IATFolder"
-    permission="zope2.View"
-    class=".showcase_view.ShowcaseView"
-    />
 
 </configure>
