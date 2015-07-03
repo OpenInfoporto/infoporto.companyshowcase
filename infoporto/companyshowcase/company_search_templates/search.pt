@@ -1,0 +1,13 @@
+    <h4 class="h1-page-title">Risultati</h4>
+
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>Azienda</th>
+        </tr>
+
+        <tr tal:repeat="item view/getItems">
+            <td></td>
+            <td><a tal:attributes="href string: @@company-details?id=${item/id}" tal:content="item/name" /></td>
+        </tr>
+    </table>

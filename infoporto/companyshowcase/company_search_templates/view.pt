@@ -6,6 +6,17 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="infoporto.companyshowcase">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
 <body>
 
 <tal:comment tal:condition="nothing">
@@ -15,57 +26,51 @@
 
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
-
-    <form name="search-companies" method="post" action="#" class="search-companies">
-        <table>
-            <tr>
-                <td width="50%">
-                    <div class="showcase-search-field">
-                        <label>Azienda</label>
-                        <input type="text" name="nome" />
-                    </div>
-                    <div class="showcase-search-field">
-                        <label>Sezione</label>
-                        <input type="text" name="sezione" />
-                    </div>
-                    <div class="showcase-search-field">
-                        <label>Merceologia</label>
-                        <input type="text" name="merceologia" />
-                    </div>
-                </td>
-                <td>
-                    <div class="showcase-search-field">
-                        <label>Citt&agrave;</label>
-                        <input type="text" name="city" />
-                    </div>
-                    <div class="showcase-search-field">
-                        <label>Attivit&agrave;</label>
-                        <input type="text" name="activity" />
-                    </div>
-                    <div class="showcase-search-field">
-                        <label>Promozioni</label>
-                        <input type="checkbox" name="promotions" />
-                    </div>
-                </td>
-            </tr>
-        </table>
-        
+    
+    <p>In questa area è possibile effettuare ricerche di Aziende del nostro territorio provinciale.
+    <p>Inserire i parametri per i quali effettuare  la ricerca</p>
+    
+    <form name="search-companies" method="post" action="@@company-search" class="search-companies">
+        <div class="form-group">
+            <label>Azienda</label>
+            <input type="text" name="name" class="input-large" id="name"/>
+        </div>
+        <div  class="form-group">
+            <label>Sezione</label>
+            <select name="section" id="section">
+                <tal:block repeat="item view/getSections">
+                    <option tal:attributes="value item/id" tal:content="item/name" />
+                </tal:block>
+            </select>
+        </div>
 
         <div class="showcase-search-actions">
-            <input type="button" value="cerca" id="submit-search" />
+            <input type="submit" value="cerca" id="submit-search" class="btn btn-primary" />
         </div>
+
     </form>
 
     <div id="showcase-results"></div>
+    
+    <h4>Oppure</h4>
+
+    <p>Cerca nei siti delle aziende</p>
 
 <script>
 
 $(function() {
 
     $('#submit-search').on('click', function(){
-    
-        $('#showcase-results').html('La ricerca non ha prodotto risultati.');
-    
+        console.log("submit");
+            $.ajax({
+                type: "POST",
+                url: portal_url+'/@@company-search',
+                data: {'name': $('#name').val(), 'section': $('#section').val()},
+                success: function(data){
+                    $('#showcase-results').html(data);
+                }
+            });
+        return false;
     })
 
 });

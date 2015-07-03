@@ -36,5 +36,18 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <browser:page
+    name="company-search"
+    for="*"
+    permission="zope2.View"
+    class=".company_search.doSearch"
+    />
+
+  <browser:page
+    name="company-details"
+    for="*"
+    permission="zope2.View"
+    class=".company_search.companyDetails"
+    />
 
 </configure>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="infoporto.companyshowcase">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<body>
+
+<metal:main fill-slot="content-core">
+  <metal:content-core define-macro="content-core">
+
+    <tal:block repeat="item view/getItems">
+
+    <table class="table">
+        <tr>
+            <th style="width:130px">Ragione Sociale</th>
+            <td tal:content="item/name"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">Indirizzo</th>
+            <td tal:content="item/name"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">Telefono</th>
+            <td tal:content="item/name"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">Fax</th>
+            <td tal:content="item/name"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">E-mail</th>
+            <td tal:content="item/name"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">Sito web</th>
+            <td tal:content="item/name"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">Sezione merceologica</th>
+            <td tal:content="item/name"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">Dove siamo</th>
+            <td>
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2864.920037574935!2d9.8260179!3d44.10564189999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d4fc97aaf02a5b%3A0xdc88b53999544e5a!2sVia+Don+Giovanni+Minzoni%2C+La+Spezia+SP!5e0!3m2!1sit!2sit!4v1424816712470" width="600" height="450" frameborder="0" style="border:0"></iframe>
+
+            </td>
+        </tr>
+    </table>
+
+    </tal:block>
+
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>

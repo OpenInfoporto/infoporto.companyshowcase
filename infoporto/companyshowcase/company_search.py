@@ -20,6 +20,9 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from infoporto.companyshowcase import MessageFactory as _
 
+from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+import xmlrpclib
 
 # Interface class; used to define content-type schema.
 
@@ -67,3 +70,66 @@ class View(grok.View):
     # grok.name('view')
 
     # Add view methods here
+    def getSections(self):
+        openerp = Openerp()
+        args = [] 
+        fields = ['id', 'name'] 
+
+        data = openerp.getItems(args, fields, 'membership.section')
+
+        sections = []
+        for d in data:
+            sections.append(dict(id=d['id'], name=d['name']))
+
+        return sections
+
+
+class Openerp():
+
+    def __init__(self):
+        self.username = 'admin' #the user
+        self.pwd = 'c0nf1ndustr1@'      #the password of the user
+        self.dbname = 'openconfindustria'    #the database
+
+        # Get the uid
+        sock_common = xmlrpclib.ServerProxy ('http://open.confindustriasp.it/xmlrpc/common')
+        self.uid = sock_common.login(self.dbname, self.username, self.pwd)
+
+        #replace localhost with the address of the server
+        self.sock = xmlrpclib.ServerProxy('http://open.confindustriasp.it/xmlrpc/object')
+
+    def getItems(self, args, fields, model):
+        ids = self.sock.execute(self.dbname, self.uid, self.pwd, model, 'search', args)
+        data = self.sock.execute(self.dbname, self.uid, self.pwd, model, 'read', ids, fields)
+
+        return data
+
+
+class doSearch(BrowserView):
+    template = ViewPageTemplateFile('company_search_templates/search.pt')
+
+    def getItems(self):
+        #TODO: name
+        openerp = Openerp()
+        args = [('membership_section_id', '=', int(self.request.section))]
+        fields = ['id', 'name']
+        data = openerp.getItems(args, fields, 'res.partner')
+        return data
+        
+    def __call__(self):
+        return self.template()
+
+
+class companyDetails(BrowserView):
+    template = ViewPageTemplateFile('company_search_templates/details.pt')
+
+    def getItems(self):
+        openerp = Openerp()
+        args = [('id', '=', int(self.request.id))]
+        fields = ['id', 'name', 'phone', 'email']
+        data = openerp.getItems(args, fields, 'res.partner')
+        return data
+
+    def __call__(self):
+        return self.template()
+
