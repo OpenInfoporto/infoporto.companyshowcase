@@ -104,6 +104,14 @@ class Openerp():
 
         return data
 
+    def getAddress(self, partner_id):
+        args = [('partner_id', '=', partner_id), ('type', 'ilike', 'delivery')]
+        fields = ['name', 'address', 'phone', 'fax', 'type', 'street2', 'city', 'country', 'street', 'email']
+        ids = self.sock.execute(self.dbname, self.uid, self.pwd, 'res.partner.address', 'search', args)
+        data = self.sock.execute(self.dbname, self.uid, self.pwd, 'res.partner.address', 'read', ids, fields)
+
+        return data
+
 
 class doSearch(BrowserView):
     template = ViewPageTemplateFile('company_search_templates/search.pt')
@@ -111,8 +119,7 @@ class doSearch(BrowserView):
     def getItems(self):
         #TODO: name
         openerp = Openerp()
-        print self.request
-        args = [('membership_section_id', '=', int(self.request.section)), ('name', 'like', self.request.name)]
+        args = [('membership_section_id', '=', int(self.request.section)), ('name', 'ilike', self.request.name)]
         fields = ['id', 'name']
         data = openerp.getItems(args, fields, 'res.partner')
         return data
@@ -120,16 +127,16 @@ class doSearch(BrowserView):
     def __call__(self):
         return self.template()
 
-
 class companyDetails(BrowserView):
     template = ViewPageTemplateFile('company_search_templates/details.pt')
 
     def getItems(self):
         openerp = Openerp()
         args = [('id', '=', int(self.request.id))]
-        fields = ['id', 'name', 'phone', 'email']
-        data = openerp.getItems(args, fields, 'res.partner')
-        return data
+        fields = ['id', 'name', 'website', 'merceologia']
+        partner = openerp.getItems(args, fields, 'res.partner')
+        address = openerp.getAddress(int(self.request.id))
+        return [dict(partner=partner[0], address=address[0])]
 
     def __call__(self):
         return self.template()
