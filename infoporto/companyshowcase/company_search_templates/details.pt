@@ -51,6 +51,12 @@
         </tr>
 
         <tr>
+            <th style="width:130px">Sezione</th>
+            <td tal:content="python: item.get('partner').get('membership_section_id')[1]"/>
+        </tr>
+
+
+        <tr>
             <th style="width:130px">Dove siamo</th>
             <td>
 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2864.920037574935!2d9.8260179!3d44.10564189999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d4fc97aaf02a5b%3A0xdc88b53999544e5a!2sVia+Don+Giovanni+Minzoni%2C+Roma+SP!5e0!3m2!1sit!2sit!4v1424816712470" width="600" height="450" frameborder="0" style="border:0"></iframe>

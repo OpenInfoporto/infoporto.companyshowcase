@@ -133,7 +133,7 @@ class companyDetails(BrowserView):
     def getItems(self):
         openerp = Openerp()
         args = [('id', '=', int(self.request.id))]
-        fields = ['id', 'name', 'website', 'merceologia']
+        fields = ['id', 'name', 'website', 'membership_section_id']
         partner = openerp.getItems(args, fields, 'res.partner')
         address = openerp.getAddress(int(self.request.id))
         return [dict(partner=partner[0], address=address[0])]
