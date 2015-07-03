@@ -111,7 +111,8 @@ class doSearch(BrowserView):
     def getItems(self):
         #TODO: name
         openerp = Openerp()
-        args = [('membership_section_id', '=', int(self.request.section))]
+        print self.request
+        args = [('membership_section_id', '=', int(self.request.section)), ('name', 'like', self.request.name)]
         fields = ['id', 'name']
         data = openerp.getItems(args, fields, 'res.partner')
         return data
