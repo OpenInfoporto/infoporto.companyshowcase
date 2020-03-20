@@ -120,7 +120,7 @@ class doSearch(BrowserView):
         #TODO: name
         openerp = Openerp()
         args = [('membership_section_id', '=', int(self.request.section)), ('name', 'ilike', self.request.name)]
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'showcase_profile', 'showcase_products']
         data = openerp.getItems(args, fields, 'res.partner')
         return data
         
@@ -133,7 +133,7 @@ class companyDetails(BrowserView):
     def getItems(self):
         openerp = Openerp()
         args = [('id', '=', int(self.request.id))]
-        fields = ['id', 'name', 'website', 'membership_section_id']
+        fields = ['id', 'name', 'website', 'membership_section_id', 'showcase_profile', 'showcase_products', 'twitter', 'facebook', 'linkedin', 'googleplus', 'maps']
         partner = openerp.getItems(args, fields, 'res.partner')
         address = openerp.getAddress(int(self.request.id))
         return [dict(partner=partner[0], address=address[0])]

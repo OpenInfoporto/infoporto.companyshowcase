@@ -31,8 +31,18 @@
         </tr>
 
         <tr>
+            <th style="width:130px">Profilo</th>
+            <td tal:content="item/partner/showcase_profile"></td>
+        </tr>
+
+        <tr>
+            <th style="width:130px">Prodotti & servizi</th>
+            <td tal:content="item/partner/showcase_products"></td>
+        </tr>
+
+        <tr>
             <th style="width:130px">Indirizzo</th>
-            <td tal:content="item/address/street"></td>
+            <td> <span tal:content="item/address/street" /> <span tal:content="item/address/city" /></td>
         </tr>
 
         <tr>
@@ -46,8 +56,13 @@
         </tr>
 
         <tr>
-            <th style="width:130px">Sito web</th>
-            <td tal:content="item/partner/website"></td>
+            <th style="width:130px">Social</th>
+            <td>
+                <span tal:condition="item/partner/twitter"><a tal:attributes="href item/partner/twitter"><img src="" alt="twitter" /></a></span>    
+                <span tal:condition="item/partner/facebook"><a tal:attributes="href item/partner/facebook"><img src="" alt="facebook" /></a></span>    
+                <span tal:condition="item/partner/linkedin"><a tal:attributes="href item/partner/linkedin"><img src="" alt="linkedin" /></a></span>    
+                <span tal:condition="item/partner/googleplus"><a tal:attributes="href item/partner/googleplus"><img src="" alt="googleplus" /></a></span>    
+            </td>
         </tr>
 
         <tr>
@@ -59,7 +74,7 @@
         <tr>
             <th style="width:130px">Dove siamo</th>
             <td>
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2864.920037574935!2d9.8260179!3d44.10564189999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d4fc97aaf02a5b%3A0xdc88b53999544e5a!2sVia+Don+Giovanni+Minzoni%2C+Roma+SP!5e0!3m2!1sit!2sit!4v1424816712470" width="600" height="450" frameborder="0" style="border:0"></iframe>
+<iframe tal:attributes="src item/partner/maps" width="600" height="450" frameborder="0" style="border:0"></iframe>
             </td>
         </tr>
     </table>
